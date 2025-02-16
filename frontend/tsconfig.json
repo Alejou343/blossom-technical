@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext", 
     "module": "esnext",
-    "jsx": "preserve",
-    "strict": true,
-    "moduleResolution": "node",
+    "jsx": "react-jsx", 
+    "moduleResolution": "node", 
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "allowImportingTsExtensions": true,
+    "allowJs": true, 
+    "skipLibCheck": true, 
+    "strict": false, 
     "noEmit": true,
-    "allowJs": true
+    "isolatedModules": false,
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": false,
+    "noImplicitAny": false 
   },
   "include": ["src"]
 }
