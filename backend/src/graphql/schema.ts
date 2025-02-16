@@ -46,11 +46,7 @@ export const dbSchema = buildSchema(`
     }
 
     type Query {
-        getCharactersById(id: ID): Character
         getCharactersByPage(page: Int): [Character]
-        initDB(page: Int): [Character]
         filterByProperty(property: String, value: String): [Character]
     }
 `);
-
-

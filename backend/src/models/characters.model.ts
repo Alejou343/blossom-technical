@@ -7,7 +7,7 @@ export const characters = sequelize.define("characters", {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
-    autoIncrement: true, // 🔥 Asegura que se genere automáticamente
+    autoIncrement: true,
   },
   name: {
     type: DataTypes.STRING,

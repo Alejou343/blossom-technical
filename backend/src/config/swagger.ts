@@ -1,6 +1,7 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express';
 import { Express } from "express";
+import { BACKEND_URL } from "./config";
 
 const options = {
     definition: {
@@ -12,7 +13,7 @@ const options = {
       },
       servers: [
         {
-          url: 'http://localhost:80',
+          url: BACKEND_URL,
           description: 'Servidor local',
         },
       ],

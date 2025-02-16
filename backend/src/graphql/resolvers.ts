@@ -1,23 +1,11 @@
 import axios from "axios";
-// import MigrationController from "../services/migrationService";
 import { GRAPHQL_ENDPOINT } from '../config/config';
 import { characters } from "../models/characters.model";
-import { locations } from "../models/locations.model";
+import MigrationServiceController from '../services/migrationService'
 
 
 export const resolvers = {
-    getCharactersById: async ({ id }) => {
-        try {
-            const character = await characters.findByPk(id);
-            if (!character) return null;   
-            console.log(character.dataValues)
-            return character;
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
-    },    
-    initDB: async ({ page }) => {
+    getCharactersByPage: async ({ page }) => {
         try {
             const response = await axios.get(GRAPHQL_ENDPOINT, {
                 params: {
@@ -44,62 +32,12 @@ export const resolvers = {
             if (!characters) return [];
 
             for (const character of responses.slice(0,15)) {
-
-                await locations.findOrCreate({
-                    where: { name: character.origin?.name }, // Buscar por nombre
-                    defaults: {
-                        id_origin: character.origin?.id ?? 99,
-                        type: character.origin?.type ?? 'unknown',
-                        dimension: character.origin?.dimension ?? 'unknown'
-                    }
-                });
-
-                await characters.create({
-                    id: character.id,
-                    name: character.name,
-                    status: character.status,
-                    species: character.species,
-                    type: character.type,
-                    gender: character.gender,
-                    image: character.image,
-                    origin_id: character.origin?.id ?? 99
-                });
+                await MigrationServiceController.migrateCharacters(character)
             }
 
             return responses;
         } catch (err) {
-            console.log(err)
-            return []
-        }
-    },
-    getCharactersByPage: async ({ page }) => {
-        try {
-            const response = await axios.get(GRAPHQL_ENDPOINT, {
-                params: {
-                    query: `{ 
-                    characters(page: ${page}) { 
-                        results { 
-                            id 
-                            name 
-                            status 
-                            species 
-                            gender 
-                            image 
-                            origin { 
-                                id 
-                                name 
-                                type 
-                                dimension
-                            } 
-                        } 
-                    } 
-                }`},
-            });
-            const responses = response.data.data.characters.results;
-            if (!characters) return [];
-            return responses;
-        } catch (err) {
-            console.log(err)
+            console.error(err)
             return []
         }
     },
@@ -134,31 +72,12 @@ export const resolvers = {
             if (!responses) return [];
 
             for (const character of responses.slice(0,15)) {
-
-                await locations.findOrCreate({
-                    where: { name: character.origin?.name }, // Buscar por nombre
-                    defaults: {
-                        id_origin: character.origin?.id ?? 99,
-                        type: character.origin?.type ?? 'unknown',
-                        dimension: character.origin?.dimension ?? 'unknown'
-                    }
-                });
-
-                await characters.create({
-                    id: character.id,
-                    name: character.name,
-                    status: character.status,
-                    species: character.species,
-                    type: character.type,
-                    gender: character.gender,
-                    image: character.image,
-                    origin_id: character.origin?.id ?? 99
-                });
+                await MigrationServiceController.migrateCharacters(character)
             }
 
             return responses;
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return []
         }
     }
