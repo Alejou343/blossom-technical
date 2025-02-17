@@ -47,7 +47,7 @@ const Card = ({ character }) => {
                     {character.status}
                 </span>
             </div>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 text-sm text-left">
                 {character.species} • {character.gender}
             </p>
 
@@ -56,7 +56,7 @@ const Card = ({ character }) => {
         {/* Sección de Interacciones */}
         <Metrics toggleLike={toggleLike} isLiked={isLiked} openModal={openModal} setOpenModal={setOpenModal} />
         {/* Sección de Comentarios */}
-        <Comments character={character} />
+        <Comments character={character} onClick= {() => setOpenModal(!openModal)} />
     </div>
   );
 };

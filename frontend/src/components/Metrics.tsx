@@ -17,18 +17,18 @@ const Metrics = ({ toggleLike, isLiked, openModal, setOpenModal }) => {
         {/* Botón de Like */}
         <button
         onClick={toggleLike}
-        className="flex items-center gap-1 text-gray-600 hover:text-green-600 transition"
+        className="flex items-center gap-1 text-gray-600 hover:text-red-600 transition"
         >
-            <Heart fill={isLiked ? "green" : "none"} className="w-5 h-5" />
+            <Heart fill={isLiked ? "red" : "none"} className="w-5 h-5" />
         </button>
 
         {/* Botón de Comentarios */}
-        <button className="flex items-center gap-1 text-gray-600 hover:text-green-600">
+        <button className="flex items-center gap-1 text-gray-600 hover:text-red-600">
             <MessageCircle className="w-5 h-5" />
         </button>
 
         {/* Botón de Soft Delete */}
-        <button className="flex items-center gap-1 text-gray-600 hover:text-green-600" onClick={() => setOpenModal(!openModal)}>
+        <button className="flex items-center gap-1 text-gray-600 hover:text-red-600" onClick={() => setOpenModal(!openModal)}>
             <Trash className="w-5 h-5" />
         </button>
     </div>

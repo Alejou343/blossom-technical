@@ -6,7 +6,7 @@ import { useAppContext } from './context/appContext'
 import './App.css'
 
 function App() {
-  const { characters, setCharacters, sort, searchTerm, setSearchTerm } = useAppContext();
+  const { characters, setCharacters, sort, searchTerm } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div>
-      <div className='h-[90vh] overflow-y-auto'>
+      <div className='h-[90vh] overflow-y-auto px-[0.5rem]'>
         <Sort />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1rem] overflow-y-auto">
           {characters
