@@ -6,9 +6,9 @@ import { useAppContext } from "../context/appContext";
 
 
 const Card = ({ character }) => {
-  const [isLiked, setIsLiked] = useState(character.isLiked);
-  const [isDeleted, setIsDeleted] = useState(character.isDeleted);
-  const [likes, setLikes] = useState(isLiked ? 1 : 0);
+  const [isLiked, setIsLiked] = useState<boolean>(character.isLiked);
+  const [isDeleted, setIsDeleted] = useState<boolean>(character.isDeleted);
+  const [likes, setLikes] = useState<number>(isLiked ? 1 : 0);
   const [openModal, setOpenModal] = useState<boolean>(false)
   const { setSelected } = useAppContext()
 

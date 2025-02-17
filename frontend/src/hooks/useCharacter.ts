@@ -6,7 +6,7 @@ import { Character } from "../interfaces";
 
 const useCharacter = () => {
   const { selected } = useAppContext();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState<string>("");
   const [character, setCharacter] = useState<Character>();
 
   useEffect(() => {

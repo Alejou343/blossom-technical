@@ -4,7 +4,7 @@ import { useAppContext } from "../context/AppContext";
 import { commentQuery } from "../utils/queries";
 
 const useComment = (initialComment = "") => {
-  const [comment, setComment] = useState(initialComment);
+  const [comment, setComment] = useState<string>(initialComment);
   const { selected } = useAppContext();
 
   const handleComment = async () => {
