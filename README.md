@@ -20,15 +20,38 @@ cd blossom-technical
 
 The necessary environment variables have already been configured to facilitate execution for both projects.
 
-## 🚀 Run the Backend
+Here's a clearer and more structured version of your instructions, including the Redis check:
 
-To start the backend server with Express.js:
+---
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+## 🚀 Start the Backend Server
+
+To ensure everything runs smoothly, follow these steps:
+
+1. **Open a terminal and start a Ubuntu shell (if not already in one).**  
+   
+2. **Verify Redis is running by executing:**  
+   ```bash
+   redis-cli ping
+   ```
+   If Redis is running correctly, you should see `PONG`. If not, make sure Redis is installed and running (`sudo service redis-server start`).
+
+3. **Navigate to the backend directory:**  
+   ```bash
+   cd backend
+   ```
+
+4. **Install dependencies:**  
+   ```bash
+   npm install
+   ```
+
+5. **Start the development server:**  
+   ```bash
+   npm run dev
+   ```
+
+Your Express.js backend should now be running! 🚀
 
 The server will run on `http://localhost:3000` or the configured port.
 
