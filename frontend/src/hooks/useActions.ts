@@ -3,7 +3,7 @@ import axios from "axios";
 import { useAppContext } from "../context/AppContext";
 import { deleteQuery, likeQuery } from "../utils/queries";
 
-const useActions = (isLiked, isDeleted) => {
+const useActions = (isLiked: boolean, isDeleted: boolean) => {
   const { selected } = useAppContext();
 
   useEffect(() => {
