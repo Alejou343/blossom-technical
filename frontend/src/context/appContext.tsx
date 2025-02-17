@@ -1,20 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { AppContextType, Character } from "../interfaces";
 
 // 1. Definir el tipo para los personajes
-interface Character {
-  id: number;
-  name: string;
-}
-
-// 2. Definir el tipo para el contexto
-interface AppContextType {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  sort: boolean;
-  setSort: (asc: boolean) => void;
-  characters: Character[];
-  setCharacters: (chars: Character[]) => void;
-}
 
 // 3. Crear el contexto con valores iniciales
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -24,9 +11,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sort, setSort] = useState<boolean>(true);
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [selected, setSelected] = useState<number>(0);
 
   return (
-    <AppContext.Provider value={{ sort, setSort, searchTerm, setSearchTerm, characters, setCharacters }}>
+    <AppContext.Provider value={{ sort, setSort, searchTerm, setSearchTerm, characters, setCharacters, selected, setSelected }}>
       {children}
     </AppContext.Provider>
   );

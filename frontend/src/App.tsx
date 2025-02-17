@@ -4,27 +4,17 @@ import Card from './components/Card'
 import Sort from './components/Sort'
 import { useAppContext } from './context/appContext'
 import './App.css'
+import { charactersQuery } from './utils/queries'
+import { Character } from './interfaces'
 
 function App() {
   const { characters, setCharacters, sort, searchTerm } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const query = `query {
-        characters {
-            id_character
-            name
-            status
-            species
-            gender
-            origin_id
-            image
-            comments
-            isLiked
-        }
-      }`
       try {
-          const response = await axios.post(`http://localhost:8080/db/graphql`, { query })
+        const query = charactersQuery;
+            const response = await axios.post(import.meta.env.VITE_BACK_LINK, { query })
           setCharacters(response.data.data.characters)
         } catch (err) {
           console.log(err)
@@ -40,8 +30,9 @@ function App() {
         <Sort />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1rem] overflow-y-auto">
           {characters
-          .sort((a: any, b: any) => sort ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
-          .filter((character: any) => {
+          .sort((a: Character, b: Character) => sort ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
+          .filter((character: Character) => !character.isDeleted)
+          .filter((character: Character) => {
             const search = searchTerm.trim().toLowerCase();
             
             return (
@@ -51,10 +42,10 @@ function App() {
               character.gender?.toLowerCase().includes(search)) ?? false
             );
           })
-          .map((character: any) => 
-            <Card character={{
+          .map((character: Character) => 
+            <Card key={character.id_character} character={{
             id_character: character.id_character,
-            name: character.name.length > 15 ? `${character.name.slice(0,15)}...` : character.name,
+            name: character.name.length > 10 ? `${character.name.slice(0,10)}...` : character.name,
             status: character.status,
             species: character.species,
             gender: character.gender,

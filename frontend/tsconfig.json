@@ -13,7 +13,8 @@
     "isolatedModules": false,
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": false,
-    "noImplicitAny": false 
+    "noImplicitAny": false ,
+    "types": ["vite/client"]
   },
   "include": ["src"]
 }
