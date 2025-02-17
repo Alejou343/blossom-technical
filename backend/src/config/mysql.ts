@@ -56,5 +56,7 @@ async function checkConnection() {
 
 (async () => {
     await createDatabase();
-    await checkConnection();
+    setTimeout(async () => {
+        await checkConnection();
+    }, 10000);
 })();
