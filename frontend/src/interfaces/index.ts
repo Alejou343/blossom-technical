@@ -11,7 +11,6 @@ export interface Character {
     isDeleted: boolean | null
 }
 
-// 2. Definir el tipo para el contexto
 export interface AppContextType {
   searchTerm: string;
   setSearchTerm: (term: string) => void;

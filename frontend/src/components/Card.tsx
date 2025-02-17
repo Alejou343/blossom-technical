@@ -27,10 +27,10 @@ const Card = ({ character }) => {
         {openModal && <Modal
             isOpenModal={openModal}
             setIsOpenModal={() => setOpenModal(!openModal)}
-            title="Descripción del personaje"
+            title="Character's description"
         />}
 
-        {/* Imagen */}
+        {/* Image */}
         <img
             src={character.image}
             alt={character.name}
@@ -38,7 +38,7 @@ const Card = ({ character }) => {
             onClick={() => setOpenModal(true)}
         />
 
-        {/* Información */}
+        {/* Information */}
         <div className="p-4" onClick={() => setOpenModal(true)}>
             <div className="flex justify-between">
                 <h2 className="text-lg font-semibold">{character.name}</h2>
@@ -57,9 +57,9 @@ const Card = ({ character }) => {
             </p>
         </div>
 
-        {/* Sección de Interacciones */}
+        {/* Interactions section */}
         <Metrics toggleLike={toggleLike} isLiked={isLiked} isDeleted={isDeleted} toggleDelete={toggleDelete} />
-        {/* Sección de Comentarios */}
+        {/* Comments section */}
         <Comments character={character} />
     </div>
   );

@@ -4,30 +4,24 @@
 
 
 body {
-    background-color: rgb(204, 153, 252);
-    
+  background-color: rgb(204, 153, 252);
 }
 
-/* Estiliza el scrollbar */
 ::-webkit-scrollbar {
-    width: 10px; /* Ancho del scrollbar */
+    width: 10px;
   }
   
-  /* Cambia el fondo del scrollbar */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color del fondo */
-    border-radius: 10px;
-  }
-  
-  /* Personaliza la barra deslizante */
-  ::-webkit-scrollbar-thumb {
-    background: rgba(57, 222, 134, 0.609); /* Color del scrollbar */
-    border-radius: 10px;
-    border: 2px solid #f1f1f1; /* Borde opcional */
-  }
-  
-  /* Hover en la barra deslizante */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(57, 222, 134); /* Color al pasar el cursor */
-  }
-  
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(57, 222, 134, 0.609);
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(57, 222, 134);
+}
