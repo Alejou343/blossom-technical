@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Card from './components/Card'
 import Sort from './components/Sort'
+import { useAppContext } from './context/appContext'
 import './App.css'
 
 function App() {
-  const [characters, setCharacters] = useState<any>([])
-  const [sort, setSort] = useState<boolean>(true)
+  const { characters, setCharacters, sort, searchTerm, setSearchTerm } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,26 +35,38 @@ function App() {
   }, [])
 
   return (
-    <>
-      <Sort sort={sort} setSort={setSort} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1rem]">
-        {characters
-        .sort((a: any, b: any) => sort ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
-        .map((character: any) => 
-          <Card character={{
-          id_character: character.id_character,
-          name: character.name.length > 15 ? `${character.name.slice(0,15)}...` : character.name,
-          status: character.status,
-          species: character.species,
-          gender: character.gender,
-          origin_id: character.origin_id,
-          image: character.image,
-          comments: character.comments,
-          isLiked: character.isLiked
-          }} /> 
-        )}
+    <div>
+      <div className='h-[90vh] overflow-y-auto'>
+        <Sort />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1rem] overflow-y-auto">
+          {characters
+          .sort((a: any, b: any) => sort ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
+          .filter((character: any) => {
+            const search = searchTerm.trim().toLowerCase();
+            
+            return (
+              (character.name?.toLowerCase().includes(search) ||
+              character.status?.toLowerCase().includes(search) ||
+              character.species?.toLowerCase().includes(search) ||
+              character.gender?.toLowerCase().includes(search)) ?? false
+            );
+          })
+          .map((character: any) => 
+            <Card character={{
+            id_character: character.id_character,
+            name: character.name.length > 15 ? `${character.name.slice(0,15)}...` : character.name,
+            status: character.status,
+            species: character.species,
+            gender: character.gender,
+            origin_id: character.origin_id,
+            image: character.image,
+            comments: character.comments,
+            isLiked: character.isLiked
+            }} /> 
+          )}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

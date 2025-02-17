@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Metrics from "./Metrics";
 import Modal from "./Modal";
-// import Comments from "./Comments";
+import Comments from "./Comments";
 
 
 const Card = ({ character }) => {
@@ -15,7 +15,7 @@ const Card = ({ character }) => {
   };
 
   return (
-    <div className="max-w-sm bg-white rounded-2xl shadow-lg p-4 flex flex-col border cursor-pointer">
+    <div className="max-w-sm h-auto bg-white rounded-2xl shadow-lg p-4 flex flex-col border cursor-pointer">
 
         {openModal && <Modal
             isOpenModal={openModal}
@@ -39,7 +39,9 @@ const Card = ({ character }) => {
                 <h2 className="text-lg font-semibold">{character.name}</h2>
                 <span
                 className={`px-3 py-1 rounded-full text-white text-xs font-semibold ${
-                    character.status === "alive" ? "bg-green-500" : "bg-red-500"
+                    character.status === "alive" ? "bg-green-500" :
+                    character.status === "dead" ? "bg-red-500" :
+                    "bg-gray-500"
                 }`}
                 >
                     {character.status}
@@ -54,7 +56,7 @@ const Card = ({ character }) => {
         {/* Sección de Interacciones */}
         <Metrics toggleLike={toggleLike} isLiked={isLiked} openModal={openModal} setOpenModal={setOpenModal} />
         {/* Sección de Comentarios */}
-        {/* <Comments character={character} /> */}
+        <Comments character={character} />
     </div>
   );
 };
