@@ -10,7 +10,7 @@ dotenv.config();
 async function main() {
     try {
         await sequelize.authenticate();
-        await sequelize.sync({ force: false });
+        await sequelize.sync({ force: true });
 
         const port = process.env.PORT || 8080;
         app.listen(port, () => {

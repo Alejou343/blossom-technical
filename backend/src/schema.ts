@@ -32,6 +32,7 @@ const CharactersType = new GraphQLObjectType({
     image: { type: GraphQLString },
     comments: { type: GraphQLString },
     isLiked: { type: GraphQLInt },
+    isDeleted: { type: GraphQLInt },
     origin: {
       type: LocationsType,
       async resolve(parent) {
@@ -85,11 +86,12 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLInt },
         comments: { type: GraphQLString },
         isLiked: { type: GraphQLInt },
+        isDeleted: { type: GraphQLInt },
       },
       async resolve(_, args) {
         await characters
           .update(
-            { comments: args.comments, isLiked: args.isLiked },
+            { comments: args.comments, isLiked: args.isLiked, isDeleted: args.isDeleted },
             { where: { id_character: args.id } },
           )
           await redis.del(`character:${args.id}`)

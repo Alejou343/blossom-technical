@@ -42,6 +42,11 @@ export const characters = sequelize.define("characters", {
     allowNull: true,
     defaultValue: null,
   },
+  isDeleted: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
+  },
 }, {
   tableName: 'characters',
   timestamps: true,
