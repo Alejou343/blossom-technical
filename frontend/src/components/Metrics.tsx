@@ -1,38 +1,9 @@
-import axios from 'axios'
 import { Heart, Trash } from 'lucide-react'
-import { useEffect } from 'react'
-import { deleteQuery, likeQuery } from '../utils/queries'
-import { useAppContext } from '../context/appContext'
+import useActions from '../hooks/useActions'
 
 const Metrics = ({ toggleLike, isLiked, isDeleted, toggleDelete }) => {
 
-    const { selected } = useAppContext()
-
-    useEffect(() => {
-        const handleLike = async () => {
-            try {
-                const query = likeQuery(selected, isLiked);
-                await axios.post(import.meta.env.VITE_BACK_LINK, { query });
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        handleLike();
-    }, [isLiked]);
-
-    useEffect(() => {
-        const handleDelete = async () => {
-            if (!isDeleted) return;
-            try {
-                const query = deleteQuery(selected);
-                await axios.post(import.meta.env.VITE_BACK_LINK, { query });
-                window.location.reload();
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        handleDelete();
-    }, [isDeleted]);
+    useActions(isLiked, isDeleted);
 
   return (
     <div className="flex gap-[1rem] justify-start items-center px-4 py-2 border-t">

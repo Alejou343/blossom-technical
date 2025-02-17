@@ -3,33 +3,11 @@ import { findByIdQuery } from "../utils/queries";
 import { useAppContext } from "../context/appContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useCharacter from "../hooks/useCharacter";
 
 const Modal = ({ isOpenModal, setIsOpenModal, title }) => {
 
-    const { selected } = useAppContext()
-    const [description, setDescription] = useState("")
-    const [character, setCharacter] = useState<any>({})
-
-    useEffect(() => {
-        const handleLike = async () => {
-            try {
-                const query = findByIdQuery(selected);
-                const response = await axios.post(import.meta.env.VITE_BACK_LINK, { query });
-                if (response.data) {
-                    const result: any = await axios.post(import.meta.env.VITE_SERVER_LINK, {
-                        text: response.data.data.character
-                    })
-                    setCharacter(response.data.data.character)
-                    setTimeout(() => {
-                        setDescription(result.data.message)
-                    }, 1000);
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        handleLike();
-    }, [selected]);
+    const { character, description } = useCharacter();
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
@@ -44,13 +22,13 @@ const Modal = ({ isOpenModal, setIsOpenModal, title }) => {
 
                 {/* Content */}
                 <div className="mt-4 text-gray-700 flex flex-col gap-[2rem]">
-                    <img src={character.image} alt="" className="w-32 h-32 object-cover rounded-full shadow-md mx-auto" />
+                    <img src={character?.image} alt="" className="w-32 h-32 object-cover rounded-full shadow-md mx-auto" />
                     <p className="text-justify border rounded-md p-[1rem]">{description}</p>
                 </div>
 
                 {/* Buttons */}
                 <div className="mt-6 flex justify-center gap-3">
-                    <button onClick={() => setIsOpenModal(!isOpenModal)} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                    <button onClick={() => setIsOpenModal(!isOpenModal)} className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
                         Accept
                     </button>
                 </div>

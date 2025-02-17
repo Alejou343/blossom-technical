@@ -13,9 +13,9 @@ export const charactersQuery = `query {
         }
     }`
 
-export const likeQuery = (id: number, like: boolean) => {
+export const likeQuery = (id: number) => {
     return `mutation {
-        updateCharacter(id: ${id}, isLiked: ${like ? 1 : 0}) {
+        updateCharacter(id: ${id}, isLiked: 1) {
             id_character
             name
             comments

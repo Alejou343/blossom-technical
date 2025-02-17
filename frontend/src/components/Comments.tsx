@@ -1,22 +1,9 @@
-import { useEffect, useState } from 'react'
 import { CircleUser, SendHorizontalIcon } from 'lucide-react'
-import { useAppContext } from '../context/appContext'
-import { commentQuery } from '../utils/queries'
-import axios from 'axios'
+import useComment from '../hooks/useComment'
 
 const Comments = ({ character }) => {
-  const [comment, setComment] = useState(character.comments || "")
-  const { selected } = useAppContext()
   
-  const handleComment = async () => {
-      try {
-          const query = commentQuery(selected, comment);
-          await axios.post(import.meta.env.VITE_BACK_LINK, { query });
-          window.location.reload()
-      } catch (err) {
-        console.log(err);
-      }
-  };
+  const { comment, setComment, handleComment } = useComment(character.comments || "");
 
   return (
     <div className="px-4 text-sm text-gray-700">
