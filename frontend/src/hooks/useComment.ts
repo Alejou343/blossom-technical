@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useAppContext } from "../context/AppContext"; // Asegúrate de importar correctamente tu contexto
+import { useAppContext } from "../context/AppContext";
 import { commentQuery } from "../utils/queries";
 
 const useComment = (initialComment = "") => {

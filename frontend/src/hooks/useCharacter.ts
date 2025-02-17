@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useAppContext } from "../context/AppContext"; // Asegúrate de importar correctamente el contexto
+import { useAppContext } from "../context/AppContext";
 import { findByIdQuery } from "../utils/queries";
 import { Character } from "../interfaces";
 
